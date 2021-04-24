@@ -1,6 +1,7 @@
 
-//express dotenv : this lybrary serves to configurate envrionment variables
-//install CORS: to access crossed between appss
+//mongoose : it is a ODM
+//install bcryptjs to encode password
+//expres-validator : to validate data, it is a big colleciton of middlewares
 
 require('dotenv').config() //config() : it will take all configuration of .env file
 const Server = require('./models/server')
