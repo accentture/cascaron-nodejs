@@ -3,10 +3,18 @@
 const { Router } = require('express') 
 const { check } = require('express-validator')
 
+
 const { isRoleValid,
         checkExistsEmail,
         checkExistsUser } = require('../helpers/db-validators')
-const{ validateFields } = require('../middlewares/validate-fields')
+
+
+/* const{ validateFields } = require('../middlewares/validate-fields')
+const { validateJWT } = require('../middlewares/validate-jwt')
+const { validateAdminRole, hasRole } = require('../middlewares/validate-roles') */
+
+const { validateFields, validateJWT, validateAdminRole, hasRole } = require('../middlewares') //it is not necessary to write index.js
+
 
 const { usersGet, 
         usersPost, 
@@ -37,9 +45,13 @@ router.put('/:id', [
 ], usersPut) 
 router.patch('/', usersPatch)
 router.delete('/:id', [
+    validateJWT,
+    //validateAdminRole,
+    hasRole('ADMIN_ROLE','VENTAS_ROLE'),
     check('id', 'It id is nod valid').isMongoId(), //to validate id of mongoDB
     check('id', 'It id is nod valid').custom(checkExistsUser),
-    validateFields
+    validateFields,
+    
 ], usersDelete)
 
 module.exports = router

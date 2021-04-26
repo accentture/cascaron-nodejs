@@ -8,6 +8,7 @@ class Server {
         this.port = process.env.PORT // // process.env.PORT : it serve to use configuration of .env, these are global variables in my Node app
 
         this.usersPath = '/api/users'
+        this.authPath = '/api/auth'
 
         //connect with database
         this.connectDB()
@@ -33,6 +34,7 @@ class Server {
         this.app.use( express.static('public'))
     }
     routes(){
+        this.app.use(this.authPath, require('../routes/auth.routes'))
         this.app.use(this.usersPath, require('../routes/user.routes')) //charging routes of users
     }
     listen(){

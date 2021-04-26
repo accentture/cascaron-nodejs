@@ -2,6 +2,7 @@
 //mongoose : it is a ODM
 //install bcryptjs to encode password
 //expres-validator : to validate data, it is a big colleciton of middlewares
+//jsonwebtoken : to generate token
 
 require('dotenv').config() //config() : it will take all configuration of .env file
 const Server = require('./models/server')

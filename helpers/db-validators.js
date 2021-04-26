@@ -3,7 +3,6 @@ const Role  = require('../models/role')
 const User = require('../models/user')
 
 const isRoleValid = async(role = '') => { //custom() method to make a custom validation 
-    console.log('-----------role', role)
     //the next is the flow to make a custom validation with express-validator
     const checkRol = await Role.findOne({ role })
     if(!checkRol){

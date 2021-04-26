@@ -85,15 +85,17 @@ const usersPatch =  (req, res = response) => {
 }
 const usersDelete = async (req, res = response) => {
     const { id } = req.params
+    const userAuthenticated = req.user
 
     //delete phisically - it is not recommendable because we can lose refential integrity
     //const user = await User.findByIdAndDelete(id)
 
     //delete updating state - recommendable
-    const user = await User.findByIdAndUpdate(id, {state:false})
+    const user = await User.findByIdAndUpdate(id, {state:false}, {new:true})
 
     res.json({
-        user
+        user,
+        userAuthenticated
     })
 }
 

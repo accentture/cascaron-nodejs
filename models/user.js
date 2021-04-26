@@ -42,7 +42,8 @@ const UserSchema = Schema({
 UserSchema.methods.toJSON = function(){ //important to use normal function or I will lose this keyword
 
     //voiding to send __v and password
-    var { __v, password, ...user } = this.toObject() 
+    var { __v, _id, password, ...user } = this.toObject() 
+    user.uid = _id
     return user
 }
 
