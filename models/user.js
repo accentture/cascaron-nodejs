@@ -47,7 +47,7 @@ UserSchema.methods.toJSON = function(){ //important to use normal function or I 
     user.uid = _id
     return user
 }
-
+ 
                 //using model of mongoose ot set name
                 //set name of model in single
 module.exports = model('Usuario', UserSchema)

@@ -1,6 +1,6 @@
 //helpers means functions to help
 const Role  = require('../models/role')
-const User = require('../models/user')
+const { Category, User, Product } = require('../models')
 
 const isRoleValid = async(role = '') => { //custom() method to make a custom validation 
     //the next is the flow to make a custom validation with express-validator
@@ -28,10 +28,40 @@ const checkExistsUser = async( id ) => {
     }
 }
 
+const checkExistsCategory = async( id ) => {
+    //to check if email exists
+    const category = await Category.findById(id)
+    if(!category) {
+        throw new Error(`This category ${id} doesn't exists`)
+    }
+}
+
+const checkStateCategory = async ( id ) => {
+    const category = await Category.findById(id)
+    if( category && !category.state){
+        throw new Error(`This category: ${id} is blocked`)
+    }
+}
+
+
+const checkExistsProduct = async( id ) => {
+
+    const category = await Product.findById(id)
+    if(!category) {
+        throw new Error(`This product ${id} doesn't exists`)
+    }
+}
+
+
+
+
 module.exports = {
     isRoleValid, 
     checkExistsEmail,
-    checkExistsUser
+    checkExistsUser,
+    checkExistsCategory,
+    checkStateCategory,
+    checkExistsProduct
 }
 
 
