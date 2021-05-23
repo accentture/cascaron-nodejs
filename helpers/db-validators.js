@@ -52,7 +52,14 @@ const checkExistsProduct = async( id ) => {
     }
 }
 
+const allowedCollections = ( collection = '', collections = [] ) => {
+    const included = collections.includes( collection )
 
+    if(!included){
+        throw new Error(`The collection ${collection} is not allowed: Only can use the next collections: ${collections}`)
+    }
+    return true
+}
 
 
 module.exports = {
@@ -61,7 +68,8 @@ module.exports = {
     checkExistsUser,
     checkExistsCategory,
     checkStateCategory,
-    checkExistsProduct
+    checkExistsProduct,
+    allowedCollections
 }
 
 
